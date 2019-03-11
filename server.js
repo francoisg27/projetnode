@@ -42,4 +42,11 @@ app.post('/post/seller',function(req,res){
 
     })
 
+//DELETE SELLER METHOD
+
+app.delete('/delete/:seller_id',function(req,res){
+    
+}
+
+
 app.listen(3000, ()=> console.log('Listening on port 3000'));
