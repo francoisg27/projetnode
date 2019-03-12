@@ -5,6 +5,7 @@ const argv = require('yargs').argv;
 const http = require('http');
 const app = express();
 const inputPort = argv.port;
+const ObjectID = mongoose.Types.ObjectId;
 
 const {Client} = require ('./models/client');
 
@@ -44,14 +45,23 @@ app.post('/post/seller',function(req,res){
 
 //DELETE SELLER METHOD
 
-app.delete('/delete/seller/:seller_id',function(req,res){
-    Seller.remove({id:req.params.seller_id},function(err){
-        if(err){
-            res.send(err);
+.delete('/delete/seller/:id', (req, res) => {
+        const { id } = req.params;
+        if (!ObjectID.isValid(id)) {
+            res.status(404).send();
+        } else {
+        Seller.findByIdAndRemove(id).then(seller => {
+                if (!seller) {
+                    res.status(404).send();
+                } else {
+                    res.send(seller);
+                }
+            }).catch(err => {
+                res.status(500).send(err);
+            });
         }
-        res.send({message:'seller deleted'});
+
     })
-})
 
 
 app.listen(3000, ()=> console.log('Listening on port 3000'));
