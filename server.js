@@ -116,6 +116,24 @@ app.post('/post/car',function(req,res){
     })
 })
 
+//DELETE CAR METHOD
+.delete('/delete/car/:id', (req, res) => {
+    const { id } = req.params;
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+    } else {
+    Car.findByIdAndRemove(id).then(car => {
+            if (!car) {
+                res.status(404).send();
+            } else {
+                res.send(car);
+            }
+        }).catch(err => {
+            res.status(500).send(err);
+        });
+    }
+
+})
 
 
 app.listen(3000, ()=> console.log('Listening on port 3000'));
