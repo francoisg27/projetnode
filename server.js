@@ -5,6 +5,7 @@ const argv = require('yargs').argv;
 const http = require('http');
 const app = express();
 const inputPort = argv.port;
+const ObjectID = mongoose.Types.ObjectId;
 
 const {Client} = require ('./models/client');
 
@@ -62,9 +63,6 @@ app.post('/post/seller',function(req,res){
 
 })
 
-
-
-
 // GET CLIENT METHOD
 app.get('/get/client',function(req,res){
     Client.find(function(err,client){
@@ -90,6 +88,26 @@ app.post('/post/client',function(req,res){
     })
 
 })
+
+    //DELETE CLIENT METHOD
+
+    .delete('/delete/client/:id', (req, res) => {
+        const { id } = req.params;
+        if (!ObjectID.isValid(id)) {
+            res.status(404).send();
+        } else {
+        Client.findByIdAndRemove(id).then(client => {
+                if (!client ) {
+                    res.status(404).send();
+                } else {
+                    res.send(client );
+                }
+            }).catch(err => {
+                res.status(500).send(err);
+            });
+        }
+    
+    })
 
 //GET CAR METHOD
 app.get('/get/car',function(req,res){
