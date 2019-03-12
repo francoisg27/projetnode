@@ -42,6 +42,26 @@ app.post('/post/seller',function(req,res){
 
     })
 
+    //DELETE SELLER METHOD
+
+.delete('/delete/seller/:id', (req, res) => {
+    const { id } = req.params;
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+    } else {
+    Seller.findByIdAndRemove(id).then(seller => {
+            if (!seller) {
+                res.status(404).send();
+            } else {
+                res.send(seller);
+            }
+        }).catch(err => {
+            res.status(500).send(err);
+        });
+    }
+
+})
+
 
 
 
