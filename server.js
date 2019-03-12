@@ -71,7 +71,30 @@ app.post('/post/client',function(req,res){
 
 })
 
+//GET CAR METHOD
+app.get('/get/car',function(req,res){
+    Car.find(function(err,car){
+        if(err){
+            res.send(err);
+        }
+        res.send(car)
+    });
+})
 
+//POST CAR METHOD
+app.post('/post/car',function(req,res){
+    var car = new Car();
+    car.brand = req.body.brand;
+    car.model = req.body.model;
+    car.color = req.body.color;
+    car.price = req.body.price;
+    car.save(function(err){
+        if(err){
+            res.send(err);
+        }
+        res.send({message :'car created'})
+    })
+})
 
 
 
