@@ -71,7 +71,13 @@ app.post('/post/client',function(req,res){
 
 })
 
+//delete client method
 
+app.delete('/delete/:client_id',function(req,res){
+    Client.remove({id:req.params.client_id},function(err){
+        
+    })
+})
 
 
 
