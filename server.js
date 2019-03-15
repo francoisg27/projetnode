@@ -60,8 +60,8 @@ app.post('/post/seller',function(req,res){
             res.status(500).send(err);
         });
     }
-
 })
+
        //UPDATE SELLER METHOD
 
        app.put('/update/seller/:id',(req,res)=>{
