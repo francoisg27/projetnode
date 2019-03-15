@@ -1,8 +1,17 @@
 README
+Description du projet :
+Entreprise de vente de voitures. 
 
-Installation des d�pendances : 
+- Vendeur ( Nom , Prenom , Age , Rang , Numéro , Voitures vendues )
+
+- Voiture (Marque , Modèle , Couleur , Prix ) 
+
+- Client (Nom , Prenom , Age , Voiture Achetée ) 
+
+
+Installation des dépendances : 
 - npm install npm --global
-- V�rifier installatio node.js avec cmd : node -v
+- Vérifier installatio node.js avec cmd : node -v
 - Pour Express : - npm init
                  - npm install express --save
                  - npm install express
