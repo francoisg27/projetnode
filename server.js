@@ -78,7 +78,7 @@ app.post('/post/seller',function(req,res){
     });
 
 
-            //FINDBYID SELLER METHOD
+            //GETBYID SELLER METHOD
 
             app.get('/get/seller/:id',(req,res)=>{
                 const {id} = req.params;
