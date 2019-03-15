@@ -195,6 +195,21 @@ app.post('/post/car',function(req,res){
         }, e => res.status(500).send(e));
     });
 
+        //FINDBYID CAR METHOD
+
+        app.get('/get/car/:id',(req,res)=>{
+            const {id} = req.params;
+            if (!ObjectID.isValid(id)) {
+               res.status(404).send();
+            };
+            Car.findById(id,req.body).then(car => {
+                if (!car) {
+                    res.status(404).send();
+                }
+                res.send(car);
+            }, e => res.status(500).send(e));
+        });
+
 
 
 
