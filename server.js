@@ -78,6 +78,22 @@ app.post('/post/seller',function(req,res){
     });
 
 
+            //FINDBYID SELLER METHOD
+
+            app.get('/get/seller/:id',(req,res)=>{
+                const {id} = req.params;
+                if (!ObjectID.isValid(id)) {
+                   res.status(404).send();
+                };
+                Seller.findById(id,req.body).then(seller => {
+                    if (!seller) {
+                        res.status(404).send();
+                    }
+                    res.send(seller);
+                }, e => res.status(500).send(e));
+            });
+
+
 // GET CLIENT METHOD
 app.get('/get/client',function(req,res){
     Client.find(function(err,client){
@@ -135,6 +151,21 @@ app.post('/post/client',function(req,res){
             res.send(client);
         }, e => res.status(500).send(e));
     });
+
+
+            //GETBYID CLIENT METHOD
+            app.get('/get/client/:id',(req,res)=>{
+                const {id} = req.params;
+                if (!ObjectID.isValid(id)) {
+                   res.status(404).send();
+                };
+                Client.findById(id,req.body).then(client => {
+                    if (!client) {
+                        res.status(404).send();
+                    }
+                    res.send(client);
+                }, e => res.status(500).send(e));
+            });
 
 //GET CAR METHOD
 app.get('/get/car',function(req,res){
@@ -195,7 +226,7 @@ app.post('/post/car',function(req,res){
         }, e => res.status(500).send(e));
     });
 
-        //FINDBYID CAR METHOD
+        //GETBYID CAR METHOD
 
         app.get('/get/car/:id',(req,res)=>{
             const {id} = req.params;
